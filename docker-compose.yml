@@ -25,6 +25,8 @@ services:
       dockerfile: infra/docker/mysql/Dockerfile
     volumes:
       - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
 
 volumes:
   mysql-data:
