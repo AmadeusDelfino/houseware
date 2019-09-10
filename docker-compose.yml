@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  fpm:
+    build:
+      context: .
+      dockerfile: infra/docker/php/Dockerfile
+    links:
+      - mysql
+    volumes:
+      - .:/var/www/html
+
+  nginx:
+    build:
+      context: .
+      dockerfile: infra/docker/nginx/Dockerfile
+    links:
+      - fpm
+    ports:
+      - 80:80
+
+  mysql:
+    build:
+      context: .
+      dockerfile: infra/docker/mysql/Dockerfile
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
