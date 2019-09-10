@@ -1,9 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Domains\Auth\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -36,4 +35,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeByUsername($query, $username)
+    {
+        return $query->where('username', $username);
+    }
+
+    public function scopeByPassword($query, $password)
+    {
+        return $query->where('password', $password);
+    }
 }
