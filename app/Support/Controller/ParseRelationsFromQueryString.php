@@ -14,5 +14,4 @@ class ParseRelationsFromQueryString
 
         return explode('|', $query);
     }
-
 }

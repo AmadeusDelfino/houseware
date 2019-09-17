@@ -5,5 +5,5 @@ Route::group(['namespace' => 'House\Controllers', 'prefix' => 'houses', 'middlew
     $route->get('/{id}', 'HouseController@find');
     $route->post('/', 'HouseController@create');
     $route->delete('/{id}', 'HouseController@delete');
-    $route->put('/{id}', 'HouseController@find');
+    $route->put('/{id}', 'HouseController@update');
 });

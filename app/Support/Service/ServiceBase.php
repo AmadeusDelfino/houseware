@@ -9,6 +9,7 @@ use App\Support\Log\Log;
 use App\Support\Model\ModelBase;
 use App\Support\Response\All;
 use App\Support\Response\Created;
+use App\Support\Response\Deleted;
 use App\Support\Response\Find;
 use App\Support\Response\Updated;
 use App\Support\Validator\Responses\ValidateFail;
@@ -61,11 +62,9 @@ abstract class ServiceBase
         if(!is_null($this->updateRules)) {
             $this->validate($data, new $this->updateRules);
         }
-
         $row = (new $this->model)->findOrFail($id);
 
         $oldData = $row->toArray();
-
         $row->fill($data);
         $row->save();
 
@@ -76,12 +75,13 @@ abstract class ServiceBase
         return new Updated($row);
     }
 
-    public function delete($id) : void
+    public function delete($id)
     {
         $resource = (new $this->model)->findOrFail($id);
         $this->makeLog(\Auth::user()->id, LOG_ACTION_DELETE, $resource);
 
         $resource->delete();
+        return new Deleted();
     }
 
     /**
