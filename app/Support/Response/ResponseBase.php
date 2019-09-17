@@ -6,9 +6,17 @@ use App\Support\Inferfaces\Response;
 
 class ResponseBase implements Response
 {
-    protected $body;
+    protected $body = [
+        'success' => true,
+        'message' => null
+    ];
     protected $statusCode = 200;
     protected $headers = [];
+
+    public function __construct($item)
+    {
+        $this->body['message'] = $item;
+    }
 
     public function getBody() : array
     {

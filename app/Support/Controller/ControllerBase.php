@@ -2,6 +2,7 @@
 
 namespace App\Support\Controller;
 
+use App\Domains\Auth\Services\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -84,7 +85,7 @@ abstract class ControllerBase extends Controller
     public function getLogedUser($token)
     {
         return (new UserService())
-            ->loginByToken($token);
+            ->user();
     }
 
 }
