@@ -2,20 +2,23 @@
 
 namespace App\Support\Response;
 
-class ResponseBase
+use App\Support\Inferfaces\Response;
+
+class ResponseBase implements Response
 {
     protected $body;
     protected $statusCode = 200;
     protected $headers = [];
 
-    public function getBody()
+    public function getBody() : array
     {
         return $this->body;
     }
 
-    public function setBody($body)
+    public function setBody(array $body) : Response
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -24,7 +27,7 @@ class ResponseBase
         return $this->statusCode;
     }
 
-    public function setStatusCode(int $statusCode): ResponseBase
+    public function setStatusCode(int $statusCode): Response
     {
         $this->statusCode = $statusCode;
         return $this;
@@ -35,7 +38,7 @@ class ResponseBase
         return $this->headers;
     }
 
-    public function setHeaders(array $headers): ResponseBase
+    public function setHeaders(array $headers): Response
     {
         $this->headers = $headers;
         return $this;

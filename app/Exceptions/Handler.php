@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        InvalidParamsException::class,
     ];
 
     /**
@@ -46,6 +46,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof InvalidParamsException) {
+            $response = $exception->getResponse();
+            return response()
+                ->json($response->getBody())
+                ->withHeaders($response->getHeaders())
+                ->setStatusCode($response->getStatusCode());
+        }
+
         return parent::render($request, $exception);
     }
 }

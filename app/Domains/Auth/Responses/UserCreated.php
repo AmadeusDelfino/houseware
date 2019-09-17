@@ -4,17 +4,18 @@
 namespace App\Auth\Responses;
 
 
+use App\Domains\Auth\Models\User;
 use App\Support\Response\ResponseBase;
 
-class UserSuccessfullyLoggedIn extends ResponseBase
+class UserCreated extends ResponseBase
 {
     protected $body = [
         'success' => true,
         'message' => null,
     ];
 
-    public function __construct(string $token)
+    public function __construct(User $user)
     {
-        $this->body['message']['token'] = $token;
+        $this->body['message']['user'] = $user;
     }
 }
