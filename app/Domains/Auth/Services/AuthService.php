@@ -29,7 +29,6 @@ class AuthService extends ServiceBase
 
         $user = Auth::user();
 
-
         return (new UserSuccessfullyLoggedIn(
             (new TokenService())->generateToken($user->id)
         ));

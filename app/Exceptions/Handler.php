@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Support\Response\ResourceNotFound;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -48,6 +50,14 @@ class Handler extends ExceptionHandler
     {
         if($exception instanceof InvalidParamsException) {
             $response = $exception->getResponse();
+            return response()
+                ->json($response->getBody())
+                ->withHeaders($response->getHeaders())
+                ->setStatusCode($response->getStatusCode());
+        }
+
+        if($exception instanceof ModelNotFoundException) {
+            $response = new ResourceNotFound();
             return response()
                 ->json($response->getBody())
                 ->withHeaders($response->getHeaders())

@@ -12,7 +12,7 @@ class TokenService
     public function generateToken($userId, $lifetimeInDays = null)
     {
         if(is_null($lifetimeInDays)) {
-            $lifetimeInDays = 1;
+            $lifetimeInDays = config('auth.guards.api.token_lifetime_in_days');
         }
 
         $tokenResult = User::findOrFail($userId)->createToken('Personal Access Token');

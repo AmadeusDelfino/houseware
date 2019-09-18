@@ -45,6 +45,7 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
             'hash' => false,
+            'token_lifetime_in_days' => 7,
         ],
     ],
 

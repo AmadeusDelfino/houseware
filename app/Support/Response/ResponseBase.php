@@ -13,9 +13,11 @@ class ResponseBase implements Response
     protected $statusCode = 200;
     protected $headers = [];
 
-    public function __construct($item = [])
+    public function __construct($item = null)
     {
-        $this->body['message'] = $item;
+        if(!is_null($item)) {
+            $this->body['message'] = $item;
+        }
     }
 
     public function getBody() : array
