@@ -16,7 +16,7 @@ trait Log
     public function makeLog($userId, $action, ModelBase $resource, $appendBody = [])
     {
         if(!method_exists($resource, 'logs')) {
-            throw new LogRelationNotFound();
+            throw new LogRelationNotFoundException();
         }
 
         $resource->logs()->create([
